@@ -1,0 +1,41 @@
+<form (ngSubmit)="onSubmit()" #signUp="ngForm">
+    <div>
+        Form submitted ? {{signUp.submitted}}
+        Form valid ? {{signUp.valid}}
+    </div>
+    <fieldset>
+        <label for="firstName">First name:</label>
+        <input type="text" id="firstName" name="user-firstName" [(ngModel)]="user.firstName" #firstName="ngModel" minlength="3" maxlength="15" required>
+    </fieldset>
+    <div *ngIf="firstName.errors && signUp.submitted">
+        <span *ngIf="firstName.errors?.['required']">First Name is required</span>
+        <span *ngIf="firstName.errors?.['minlength']">First name must be at least 3 characters long</span>
+        <span *ngIf="firstName.errors?.['maxlength']">First name must be at most 15 characters long</span>
+    </div>
+
+    <fieldset>
+        <label for="lastName">Last name:</label>
+        <input type="text" id="lastName" name="user-lastName" [(ngModel)]="user.lastName" #lastName="ngModel" minlength="3" maxlength="15" required>
+    </fieldset>
+    <div *ngIf="lastName.errors && signUp.submitted">
+        <span *ngIf="lastName.errors?.['required']">Last name is required</span>
+        <span *ngIf="lastName.errors?.['minlength']">Last name must be at least 3 characters long</span>
+        <span *ngIf="lastName.errors?.['maxlength']">Last name must be at most 15 characters long</span>
+    </div>
+
+    <fieldset>
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="user-email" [(ngModel)]="user.email" #email="ngModel" required email>
+    </fieldset>
+    <div *ngIf="email.errors && signUp.submitted">
+        <span *ngIf="email.errors?.['required']">Email is required</span>
+        <span *ngIf="email.errors?.['email']">Email must be valid</span>
+    </div>
+
+    <fieldset>
+        <label for="password">Password:</label>
+        <input type="password" id="password" required>
+    </fieldset>
+
+    <button type="submit">Submit</button>
+</form>
